@@ -1,13 +1,14 @@
-public class Character {
+public class Character implements Mortal {
     private String name;
     private final String birthplace;
-
     private Gender gender;
+    private static int worldPopulation;
 
     public Character(String name, String birthplace, Gender gender) {
         this.name = name;
         this.birthplace = birthplace;
         this.gender = gender;
+        worldPopulation++;
     }
 
     public String getName() {
@@ -38,5 +39,14 @@ public class Character {
         if(this.gender == Gender.MALE){
             this.gender = Gender.EUNUCH;
         }
+    }
+
+    public int getWorldPopulation() {
+        return worldPopulation;
+    }
+
+    @Override
+    public void die() {
+        worldPopulation--;
     }
 }
