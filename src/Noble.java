@@ -43,4 +43,13 @@ public class Noble extends Character {
         }
         return string.substring(0, string.length() - 2);
     }
+
+    @Override
+    public void die() {
+        for (var actual : houses) {
+            System.out.println(actual.getMotto());
+        }
+        super.die();
+    }
+
 }

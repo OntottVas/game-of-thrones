@@ -2,7 +2,7 @@ public class Character implements Mortal {
     private String name;
     private final String birthplace;
     private Gender gender;
-    private static int worldPopulation;
+    private static int worldPopulation = 0;
 
     public Character(String name, String birthplace, Gender gender) {
         this.name = name;
@@ -41,7 +41,7 @@ public class Character implements Mortal {
         }
     }
 
-    public int getWorldPopulation() {
+    public static int getWorldPopulation() {
         return worldPopulation;
     }
 
