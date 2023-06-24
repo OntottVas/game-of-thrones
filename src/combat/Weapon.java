@@ -11,7 +11,12 @@ public abstract class Weapon {
         this.range = range;
     }
 
-    public void attack() {
+    public void attack() {};
 
+    @Override
+    public String toString() {
+        return ", name='" + name + '\'' +
+                ", damage=" + damage +
+                ", range=" + range;
     }
 }

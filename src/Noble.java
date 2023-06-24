@@ -1,21 +1,36 @@
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Noble extends Character {
     private final Set<House> houses = new HashSet<>();
-    private int wealth;
+    private Map<String, Integer> coins = new HashMap<>();
 
-    Noble(String name, String birthplace, Gender gender, Set<House> houses, int wealth) {
+    Noble(String name, String birthplace, Gender gender, Set<House> houses) {
         super(name, birthplace, gender);
-        this.wealth = wealth;
+    }
+
+    public void addWealth(String currency, int value) {
+        this.coins.put(currency, value);
+    }
+
+    public void removeWealth(String currency, int value) {
+        this.coins.remove(currency, value);
     }
 
     public int getWealth() {
-        return wealth;
-    }
-
-    public void setWealth(int wealth) {
-        this.wealth = wealth;
+        int sum = 0;
+        for (var actual : coins.entrySet()) {
+            String currency = actual.getKey();
+            switch (currency) {
+                case "gold" -> sum += actual.getValue() * 100;
+                case "silver" -> sum += actual.getValue() * 10;
+                case "copper" -> sum += actual.getValue();
+                default -> {}
+            }
+        }
+        return sum;
     }
 
     public Set<House> getHouse() {
@@ -33,7 +48,7 @@ public class Noble extends Character {
     @Override
     public String toString() {
         return super.getName() + " of house " + getHousesString() +
-                " has " + this.wealth + " gold dragons.";
+                getWealth() + " wealth in copper";
     }
 
     public String getHousesString() {
@@ -41,7 +56,7 @@ public class Noble extends Character {
         for (House house : houses) {
             string += house + ", ";
         }
-        return string.substring(0, string.length() - 2);
+        return string.substring(0, string.length() - 1);
     }
 
     @Override
